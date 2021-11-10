@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+
+  <%= form_with url: libros_path, method: :get do |form| %>
+    <%= form.label :query, "Search for:" %>
+    <%= form.collection_select :libro_id, Libro.order(:estado), :id, :estado %>
+    <%= form.submit "Search" %>
+  <% end %>
+
+
+<h1>Libros Rafa</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Autor</th>
+      <th>Estado</th>
+      <th>Fecha prestado</th>
+      <th>Fecha devolucion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @libros.each do |libro| %>
+      <tr>
+        <td><%= libro.titulo %></td>
+        <td><%= libro.autor %></td>
+        <td><%= libro.estado %></td>
+        <td><%= libro.fecha_prestado %></td>
+        <td><%= libro.fecha_devolucion %></td>
+        <td><%= link_to 'Show', libro %></td>
+        <td><%= link_to 'Edit', edit_libro_path(libro) %></td>
+        <td><%= link_to 'Destroy', libro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Libro', new_libro_path %>
